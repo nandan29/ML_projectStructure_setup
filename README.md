@@ -15,6 +15,8 @@ python setup.py install
 
 -e . => in requirements.txt will take care that package/folder conataining __init__.py ( example housing) gets installed along with other external libraries in txt file. (internally use setup.py file)
 
+*** .egg file contains information abt our custom package ( example housing)
+
 
 3) __init__.py -> we are converting housing into sort of module or package and for that __init__.py file is required.
 Now this housing module can be called form any other file.
