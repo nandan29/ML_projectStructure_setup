@@ -13,7 +13,7 @@ python setup.py install
 
 ***right now setup.py is giving some issues , so go with manual installation pip install -r requirements.txt
 
--e . => in requirements.txt will take care that housing package gets installed along with other external libraries in txt file. (internally use setup.py file)
+-e . => in requirements.txt will take care that package/folder conataining __init__.py ( example housing) gets installed along with other external libraries in txt file. (internally use setup.py file)
 
 
 3) __init__.py -> we are converting housing into sort of module or package and for that __init__.py file is required.

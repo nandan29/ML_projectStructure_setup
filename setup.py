@@ -30,6 +30,6 @@ name=PROJECT_NAME,
 version=VERSION,
 author=AUTHOR,
 description=DESCRIPTION,
-packages=find_packages(), #returns a list of all folders/packages which has __init__.py file   #IMPORTANT
+packages=find_packages(), #returns a list of all folders/packages which has __init__.py file,equivalent to -e .   #IMPORTANT
 install_requires=get_requirements_list() #IMPRORTANT
 )
