@@ -5,8 +5,17 @@ Creating containers , CICD pipeline , Deployment on Heroku
 
 STEPS:-
 1) created folder called housing and within that __init__.py file.
-2) setup.py file
+2) create setup.py file
 3)run command pip install -r requirements.txt ( as python setup.py install is giving problems)
+4) created folders with __init__.py file in it
+    exception package
+    logger package
+    pipeline package
+    component package
+    config package
+    entity package
+5)Now lets work on logger folder
+
 
 
 
@@ -22,7 +31,7 @@ python setup.py install
 """
 
 ***If setup.py is giving some issues in running, so go with manual installation pip install -r requirements.txt.But remember :-
-     ADDING -e . in requirements.txt will take care that package/folder conataining __init__.py ( example housing) gets installed .  
+     ADDING -e . in requirements.txt will take care that  , package/folder conataining __init__.py ( example housing) gets installed .  
     -e . internally use setup.py file  
     find_packages() is equivalent to -e . 
 
@@ -33,3 +42,14 @@ python setup.py install
 
 3) __init__.py -> we are converting housing into a package and for that __init__.py file is required.
 Now this housing package can be called form any other file.
+
+4) Folder structure
+
+housing 
+    __init__.py
+    exception package
+    logger package
+    pipeline package
+    component package
+    config package
+    entity package
