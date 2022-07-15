@@ -8,7 +8,6 @@ PROJECT_NAME ="HOUSING PRICE PREDICTION"
 VERSION="0.0.1"
 AUTHOR="SHUBHAM SRIVASTAVA"
 DESCRIPTION="Setting up the entire ML pipeline"
-
 REQUIREMENTS_FILE_NAME = "requirements.txt"
 
 
@@ -17,6 +16,10 @@ REQUIREMENTS_FILE_NAME = "requirements.txt"
 def get_requirements_list()->List[str]:
     """
     this function is going to return a list of requirements as strings , present in requirements.txt file
+
+    here we are removing -e .  , as we know that find_packages() is equivalent to -e . and find_packages() will install
+    our custom package llly -e . will install our custom packages so removing it in order to avoid installing our
+    custom package 2 times.
 
     
     """
@@ -30,6 +33,6 @@ name=PROJECT_NAME,
 version=VERSION,
 author=AUTHOR,
 description=DESCRIPTION,
-packages=find_packages(), #returns a list of all folders/packages which has __init__.py file,equivalent to -e .   #IMPORTANT
+packages=find_packages(),   #IMPORTANT
 install_requires=get_requirements_list() #IMPRORTANT
 )
