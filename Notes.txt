@@ -1,0 +1,146 @@
+**taking base structure from projectDockerization--CICD REPO
+
+STEPS:-
+1) created folder called housing and within that __init__.py file.
+2) create setup.py file
+3)run command pip install -r requirements.txt ( as python setup.py install is giving problems)
+4) created folders with __init__.py file in housing folder
+    exception package
+    logger package
+    pipeline package
+    component package
+    config package
+    entity package
+    util package  -  to keep the helper functions over der 
+    constant package - to keep all the constants over der of the entire project
+5)Now lets work on logger folder
+6)Now lets work on exception folder
+7)Now lets work on entity folder (used for specifying the configurations .)
+        i)created a file called config_entity.py , inorder to specify the structure for each 
+        component of the pipeline (after creating structure for each component we have a rough idea wat information to supply for each parameter)
+8)create config folder (outside of housing folder)      
+        i)create a file called config.yaml - this is defined to create information that needs to be passed to the 
+        parameters of , each component of the pipeline
+9) Coming back to the config folder (inside housing folder)
+Now we will actually pass information from config.yaml file to named tuples of each component of the pipeline defined 
+in config_entity.py .
+        i)create a file called configuration.py
+        ii) created a file called util.py (inside util folder inside housing) and in that defined a function to read data from yaml file
+        iii) Now we will actually use this function( read_yaml_file) to pass data from schema.yaml file to the named_tuple.
+        iv) for supplying information to the named tuple we will be involving 4 files config.yaml , configuration.py ,
+        __init__.py (inside constant folder) , config_entity.py
+                        a) create constants for keys present in config.yaml , in __init__.py (inside constant folder)
+                        b)now using read_yaml_file() o/p and constants defined , supply info to each parameter of the named tuple of each component
+
+
+10_ Now lets come back to entity folder 
+        i) create a file called artifact_entity.py inside entity folder (similat to the config_entity.py which 
+        will also contain name tuples but those named tuple elements will contain o/p result from each component of the pipeline)
+
+AFTER CREATING THE CONFIGURATIONS FOR EACH COMPONENT OF THE PIPELINE , our config_entity is ready
+
+10) Now working on component folder (on each component) [using config_entity o/p]
+        here for each named tuple element in DataIngestionArtifact , we will define a function to get the o/p.
+                                I/P to these function will be elements of named tuple in DataIngestionConfig
+
+
+       i) data_ingestion.py  
+
+
+
+
+
+
+NOTES:-
+
+point 1:-
+setup.py -> 
+1) to install all the libraries mentioned in RQUIREMENTS.TXT file ( by doing this ,  we can avoid manually installing all the libraries by writing command pip install -r requirements.txt) .  [LINE NO 34]
+2) to install our custom packages , in our case housing [LINE NO 33]
+"""
+python setup.py install
+"""
+
+***If setup.py is giving some issues in running, so go with manual installation pip install -r requirements.txt.But remember :-
+     ADDING -e . in requirements.txt will take care that  , package/folder conataining __init__.py ( example housing) gets installed .  
+    -e . internally use setup.py file  
+    find_packages() is equivalent to -e . 
+
+
+
+2) .egg file contains information abt our custom package ( example housing)
+
+
+3) __init__.py -> we are converting housing into a package and for that __init__.py file is required.
+Now this housing package can be called form any other file.
+
+4) Folder structure
+
+housing 
+    __init__.py
+    exception package
+    logger package
+    pipeline package
+    component package
+    config package
+    entity package
+
+
+4) ML PROJECT  pipeline EXPLAINED 
+
+1) data ingestion
+            split the data into train and test ,  after one final data is prepared , collected from various source
+2) data validation
+            i)schema validation - Data exsist or not , How many columns , column names , column datatypes 
+            ii)duplicate records
+            iii)null check
+            iv)outlier detection
+            v)imbalance dataset check
+            vi) domain value ( example :- negative valus in age attribute , categories other then M , F , Otthers in sex column)
+            vii) data distribution
+            viii) Data Drift ( diff in stats between new data and data we have used for training , done in order to avoid model degradation)
+
+3) EDA( in jupyter notebook)
+4) data transformation or feature engineering
+
+** all the featue engg we do on training data need to be pickled , so that it can be used for  applying feature engg on test data
+
+5) Model Training
+        i) model selection (which ever is performing better)
+        ii) hyper-parameter tuning
+        iii) cross -validation etc etc
+
+**model object we build on training data need to be pickled , so that it can be used for applying on test data for prediction.
+
+6) Model evaluation
+        i) use test data for model evaluation after transforming the data with feature engg and prediction with model object pickle file
+
+        ii) model comparison - here we will compare the model which is  in production and the model we have just trained .IF there is a significant increase in accuracy , then we can push this model to production else leave it.
+
+7) Model Deployment - pushing the model to production.
+
+
+***data validation , data transformation , model training - all these steps on the training data only.
+
+****After doing all the steps we will have 2 pickle files
+1) feature engg object 
+2) model object 
+if any new data point comes , we will pass it through these two pickle files and we will get the prediction.(REFER THE SCREENSHOT)
+
+*** There is no need to build pipeline for test data.
+            
+Data Versioning - > after training the model , u get new data which is different from old data on which model is 
+trained . So , its a new data version.
+
+**artefact - results generated during the pipeline run.
+
+
+5) we can create jupyter notebook in vs-code , while  creating a file .
+i) give extension .ipynb
+ii) pip install ipykernel , pip install jupyter
+
+In top right corner , you will see the python version , it should be same as your current project
+
+
+
+
