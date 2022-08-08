@@ -1,7 +1,7 @@
 from housing.component.data_ingestion import DataIngestion
-from housing.config.configuration import Configuration
+from housing.config.configuration import  Configuartion
 from housing .logger import logging
-from housing.exception import housing_exception
+from housing.exception import HousingException
 import os, sys
 
 from housing.entity.config_entity import DataIngestionConfig
@@ -10,19 +10,27 @@ from housing.component.data_ingestion import DataIngestion
 
 
 class Pipeline:
-    def __init__(self, config:Configuration = Configuration())->None:
+    def __init__(self, config:Configuartion)->None:
         self.config = config
 
 
-
-
-    def start_data_ingestion(self):
+    def start_data_ingestion(self) -> DataIngestionArtifact:
         try:
-            data_ingestion_configuration  = self.config.get_data_ingestion_config() #getting data ingestion config
-            #creating an object for DataIngestion and feeding into DataIngestionConfig as an i/p, generated from configuaration file.
-            data_ingestion = DataIngestion(data_ingestion_config=data_ingestion_configuration)
-
-            #now we will trigger the data ingestion pipeline
-            data_ingestion.initiate_DataIngestion()
+            data_ingestion = DataIngestion(data_ingestion_config= self.config.get_data_ingestion_config())
+            return data_ingestion.initiate_data_ingestion()
         except Exception as e:
-            raise housing_exception(e,sys) from e
+            raise HousingException(e, sys) from e
+
+
+
+
+
+
+    def run_pipeline(self):
+        try:
+            #data ingestion
+            data_ingestion_Artifact = self.start_data_ingestion()
+
+            return data_ingestion_Artifact
+        except Exception as e:
+            raise HousingException(e,sys) from e

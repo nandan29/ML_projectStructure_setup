@@ -1,5 +1,5 @@
 
-from housing.exception import housing_exception
+from housing.exception import HousingException
 import yaml
 import sys
 
@@ -12,5 +12,5 @@ def read_yaml_file(file_path:str)->dict:
         config_info = yaml.safe_load(yaml_file)
         return config_info
     except Exception as e:
-        raise housing_exception(e,sys) from e
+        raise HousingException(e,sys) from e
 

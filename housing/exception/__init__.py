@@ -1,27 +1,22 @@
 import os
 import sys
 
-class housing_exception(Exception):
-    def __init__(self,error_msg:Exception,error_details:sys):
-        super().__init__(error_msg) #error msg will be send to the parent class
-        self.error_msg = self.get_detailed_error_msg(error_msg = error_msg,
-                                                        error_details=error_details)
+class HousingException(Exception):
+    
+    def __init__(self, error_message:Exception,error_detail:sys):
+        super().__init__(error_message)
+        self.error_message=HousingException.get_detailed_error_message(error_message=error_message,
+                                                                       error_detail=error_detail
+                                                                        )
 
 
-
-    #lets prepare the detailed error msg in a beautiful way containing all the information.
     @staticmethod
-    def get_detailed_error_msg(error_msg:Exception , error_details:sys)->str:
-
+    def get_detailed_error_message(error_message:Exception,error_detail:sys)->str:
         """
-        error_msg :Exception object 
-        error_detail:sys object
-        
-        
+        error_message: Exception object
+        error_detail: object of sys module
         """
-
-
-        _,_ ,exec_tb = error_details.exc_info()
+        _,_ ,exec_tb = error_detail.exc_info()
         exception_block_line_number = exec_tb.tb_frame.f_lineno
         try_block_line_number = exec_tb.tb_lineno
         file_name = exec_tb.tb_frame.f_code.co_filename
@@ -29,7 +24,7 @@ class housing_exception(Exception):
         Error occured in script: 
         [ {file_name} ] at 
         try block line number: [{try_block_line_number}] and exception block line number: [{exception_block_line_number}] 
-        error message: [{error_msg}]
+        error message: [{error_message}]
         """
         return error_message
 
@@ -38,12 +33,4 @@ class housing_exception(Exception):
 
 
     def __repr__(self) -> str:
-        return housing_exception.__name__.str()
-
-
-
-
-
-
-
-
+        return HousingException.__name__.str()
