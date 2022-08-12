@@ -10,8 +10,9 @@ def main():
 
         pipeline = Pipeline(Configuartion(config_file_path=config_file_path))
         pipeline.run_pipeline()
+        
     except Exception as e:
-        logging.error("e")
+        raise HousingException(e,sys)
 
 
 

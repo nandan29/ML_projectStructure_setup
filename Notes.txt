@@ -44,7 +44,32 @@ AFTER CREATING THE CONFIGURATIONS FOR EACH COMPONENT OF THE PIPELINE , our confi
                                 I/P to these function will be elements of named tuple in DataIngestionConfig
 
 
-       i) data_ingestion.py  
+***this completes data_ingestion.py
+
+ii) Now next component - data_validation
+created a schema.ymal file in config folder(which contain the data schema)
+Now repeating the same process:-
+i) update __init__.py file in constant package by creatign constants
+ii)go to configuration.py file and create a function for generating Data Validation Config named tuple values
+(DEFINED IN config_entity)
+iii)no work on data_validation.py (here o/p from data ingestion artifact and data validation config will be used as an i/p)
+iv)go to pipeline.py
+v) go to demo.py and run the pipeline for testing
+
+       
+
+iii) now next component - data transformation.py file
+**** add_bedroom_per_room =True in config.ymal indicats that this new feature need to be added.
+
+
+
+
+
+
+
+
+once we have completed the code for all the components we will create another file called pipeline.py , which create a pipeline
+connecting all the components of the pipeline.
 
 
 
@@ -140,6 +165,14 @@ i) give extension .ipynb
 ii) pip install ipykernel , pip install jupyter
 
 In top right corner , you will see the python version , it should be same as your current project
+
+IN schema.yaml file
+**category type is nothing but object or string.
+**domain_value indicates what all categories can be present in the categorical column
+
+
+*** if their is a change in input data stats that can lead to machine learning performance degrade is called data drift
+In data drift we compare stats of training data with the testing data .IN ORDER TO CHECK THE DATA DRIFT.
 
 
 
